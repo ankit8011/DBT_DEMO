@@ -4,12 +4,8 @@ WITH CTE AS (
     TEMP,
     DATE(TIME) AS DATE,
     TIME(TIME) AS TIME,
-    DAYNAME(TIME),
-    CASE
-    WHEN DAYNAME(TIME) IN ('Sat', 'Sun')
-    THEN 'WEEKEND'
-    ELSE 'WEEKDAY'
-    END AS DAYTYPE
+    DAYNAME(TIME) AS DAY,
+    {{daytype('DAYNAME(TIME)')}} AS DAYTYPE
     from 
     {{source ('demo', 'weather')}}
 )
